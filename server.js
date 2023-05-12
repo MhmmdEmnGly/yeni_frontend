@@ -23,14 +23,14 @@ app.get('/', function(req, res,next) {  // "locachost:3000/"
 });
 
 
-//
+
 
 // POST isteği karşılanması
 app.post('/endpoint', (req, res) => {
 
     const localStorage = new LocalStorage('./local-storage');
 
-    localStorage.setItem('motor', req.body.motor);
+    localStorage.setItem('motor', req.body.motor);// servo da yazabilirsin
     localStorage.setItem('fan', req.body.fan);
     //localStorage.setItem('sicaklik', req.body.sicaklik);
     
@@ -56,6 +56,51 @@ app.post('/endpoint', (req, res) => {
   console.log(result);
   console.log("........................");
 });
+
+
+
+// POST isteği karşılanması
+app.post('/espdenGelenVeriler', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+
+  localStorage.setItem('sicaklik', req.body.sicaklik);// servo da yazabilirsin ************ daha duzenlemedim
+  localStorage.setItem('isitici', req.body.isitici);
+  localStorage.setItem('isik', req.body.isik);
+  localStorage.setItem('gazDurum', req.body.gazDurum);
+  
+
+console.log("esp32den veriler geldi...");
+console.log("........................");
+console.log("sicaklik :"+req.body.sicaklik)
+console.log("isitici :"+req.body.isitici)
+console.log("isik :"+req.body.isik)
+console.log("gaz Durum :"+req.body.gazDurum)
+res.json("OK");
+});
+
+
+app.get('/verileriEkrandaGoster', (req, res) => {
+
+
+  const localStorage = new LocalStorage('./local-storage');
+
+  const dataesp32 = {
+
+    sicaklikDurum: localStorage.getItem('sicaklik'),
+    isiticiDurum: localStorage.getItem('isitici'),
+    isikDurum: localStorage.getItem('isik'),
+    gazDurum: localStorage.getItem('gazDurum')
+  
+  
+  
+  };
+  
+  res.json(dataesp32);
+
+  
+});
+
 
 
 

@@ -11,13 +11,62 @@
     <button id="motorButon" type="submit">Motor Ac-Kapa</button>
   </form>
 
-  <label id="label1"></label>
+  <label id="sicaklik1" style="color:blue"></label>
+  <label id="isik1" style="color:Red"></label>
+  <label id="isitici1" style="color:green"></label>
+  <label id="gazDurum1" style="color:blue"></label>
+  
+
+  
 
   <script>
 
     //var meg =0;
     var motorDurum =0;
-    window.onload = function() {
+    var sicaklik =0;
+    var isitici =0;
+    var isik = 0;
+    var gazDurum=0;
+    
+    // --------------------------------------
+    
+    // BU KISIMDA SICAKLIK RFID ISIK VE GAZ BILGILERINI EKRANDA GOSTERME ICIN 1 SANIYEDE BIR EKRANA YAZDIRMA ISLEMLERI YAPILIYOR
+    setInterval(function() {
+
+      // TEST AMACLI BASTA bilgiler localhost a ve gosterilenveriler kısmına gönderilecek
+      fetch('http://localhost:3000/verileriEkrandaGoster') // BURAYI localhosttan cıkar
+          .then(response => response.json())
+          .then(data => {
+             sicaklik = data.sicaklikDurum;
+             isitici =data.isiticiDurum;
+             isik = data.isikDurum;
+             gazDurum=data.gazDurum;
+            
+            console.log(sicaklik);
+            console.log(isitici);
+            console.log(isik);
+            console.log(gazDurum);
+            
+            
+            //document.getElementById("label1").textContent = labelValues;
+
+            document.getElementById("sicaklik1").textContent = sicaklik;
+            document.getElementById("isitici1").textContent = isitici;
+            document.getElementById("isik1").textContent = isik;
+            document.getElementById("gazDurum1").textContent = gazDurum;
+
+            const myButton = document.getElementById("motorButon");
+            
+          })
+          .catch(error => console.error(error));
+
+    },2000)
+
+
+
+    window.onload = function(){
+
+      // --------------------------------------
 
       // CANLI SITE ISMI VER
 
