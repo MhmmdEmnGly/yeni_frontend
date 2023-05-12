@@ -14,40 +14,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-
-// app.post('/esp32Verileri', (req, res) => {
-
-//     const localStorage = new LocalStorage('./local-storage');
-
-    
-//     localStorage.setItem('isik', req.body.sicaklik);
-//     localStorage.setItem('sicaklik', req.body.sicaklik);
-    
-    
-
-  
-//   var result = {
-     
-//     //   motorDurum: localStorage.getItem('motor'),
-//     //   fan: localStorage.getItem('fan'),
-//     //   sicaklik: localStorage.getItem('sicaklik'),
-
-//      motorDurum: req.body.motor,
-//      sicaklik : req.body.sicaklik,  
-//      fan : req.body.fan
-//     };
-
-//   // Sonucun JSON formatında gönderilmesi
-//   //res.json(result);
-
-//     res.json(result)
-
-//   console.log("\nPost islemi basariyla gerceklesti...");
-//   console.log(result);
-//   console.log("........................");
-// });
+// hata cıkarsa burayı yoruma al
 
 
+app.get('/', function(req, res,next) {  // "locachost:3000/"
+  res.sendFile(__dirname + '/index.html');
+
+});
+
+
+//
 
 // POST isteği karşılanması
 app.post('/endpoint', (req, res) => {
@@ -57,7 +33,6 @@ app.post('/endpoint', (req, res) => {
     localStorage.setItem('motor', req.body.motor);
     localStorage.setItem('fan', req.body.fan);
     //localStorage.setItem('sicaklik', req.body.sicaklik);
-    
     
 
   
