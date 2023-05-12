@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>POST İsteği Gönderme Örneği</title>
+</head>
+<body>
+  <h1>POST İsteği Gönderme Örneği</h1>
+  <form id="my-form">
+    
+    <button id="motorButon" type="submit">Motor Ac-Kapa</button>
+  </form>
+
+  <label id="label1"></label>
+
+  <script>
+
+    //var meg =0;
+    var motorDurum =0;
+    window.onload = function() {
+
+        fetch('http://localhost:3000/roomData')
+          .then(response => response.json())
+          .then(data => {
+             motorDurum = data.motorDurum;
+            //meg=motorDurum;
+            console.log(motorDurum)
+            //document.getElementById("label1").textContent = labelValues;
+
+            const myButton = document.getElementById("motorButon");
+            if(motorDurum==1){
+            myButton.style.backgroundColor = "green";
+            }
+            else {myButton.style.backgroundColor = "red";}
+          })
+          .catch(error => console.error(error));
+      };
+    
+
+    // var motorDurum=0;
+    // var motorSayac=1;
+    // var sicaklikHava =25;
+    // var fanDurum=0
+
+    const form = document.querySelector('#my-form');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Formun varsayılan davranışını engelleme
+
+        
+        // motorSayac++;
+        // motorDurum = motorSayac % 2;
+        
+        if(motorDurum==0){
+            motorDurum=1
+        }
+            else {
+                motorDurum=0 }
+
+        
+        //else { console.log("hatalı bir durum..."+ motorSayac);}  // nolur nolmaz belki sorun olur diye yazdım buraya hiç girmemesi gerekiyor
+        console.log(motorDurum);
+
+      try {
+        const response = await fetch('http://127.0.0.1:3000/endpoint', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ 
+            motor: motorDurum,
+            sicaklik : 11,
+            fan : 1})
+        });
+
+        const responseData = await response.text();
+        console.log(responseData);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+
+
+
+
+
+  </script>
+</body>
+</html>
+
