@@ -35,7 +35,9 @@
 
       // TEST AMACLI BASTA bilgiler localhost a ve gosterilenveriler kısmına gönderilecek
       //https://webtekproje.onrender.com
-      //https://webtekcanli.onrender.com/verileriEkrandaGoster
+
+
+      //https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
       fetch('https://webtekproje.onrender.com/verileriEkrandaGoster') // http://localhost:3000/verileriEkrandaGoster BURAYI localhosttan cıkar
           .then(response => response.json())
           .then(data => {
@@ -62,7 +64,7 @@
           })
           .catch(error => console.error(error));
 
-    },2000)
+    },5000)
 
 
 
@@ -72,6 +74,7 @@
 
       // CANLI SITE ISMI VER
 
+        //https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
         fetch('https://webtekproje.onrender.com/roomData')
           .then(response => response.json())
           .then(data => {
@@ -114,7 +117,7 @@
         console.log(motorDurum);
 
       try {
-        const response = await fetch('https://webtekproje.onrender.com/endpoint', {
+        const response = await fetch('https://webtekproje.onrender.com/endpoint', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
