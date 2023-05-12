@@ -19,7 +19,7 @@ app.use(cors());
 
 app.get('/', function(req, res,next) {  // "locachost:3000/"
   res.sendFile(__dirname + '/index.html');
-
+  console.info(__dirname);
 });
 
 
