@@ -34,7 +34,7 @@
     setInterval(function() {
 
       // TEST AMACLI BASTA bilgiler localhost a ve gosterilenveriler kısmına gönderilecek
-      fetch('http://localhost:3000/verileriEkrandaGoster') // BURAYI localhosttan cıkar
+      fetch('https://webtekcanli.onrender.com/verileriEkrandaGoster') // http://localhost:3000/verileriEkrandaGoster BURAYI localhosttan cıkar
           .then(response => response.json())
           .then(data => {
              sicaklik = data.sicaklikDurum;
