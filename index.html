@@ -19,7 +19,9 @@
     var motorDurum =0;
     window.onload = function() {
 
-        fetch('http://localhost:3000/roomData')
+      // CANLI SITE ISMI VER
+
+        fetch('https://webtekcanli.onrender.com/roomdata')
           .then(response => response.json())
           .then(data => {
              motorDurum = data.motorDurum;
