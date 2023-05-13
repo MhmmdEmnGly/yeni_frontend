@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -8,12 +9,10 @@
 	
 </head>
 <body>
-
 	<div class="page">
 		<div class="sidebar">
 			<div id="logo">
-                <!--  burayı degistirdim dikkat etc-->  
-				<a href="index.html"><img src="images/logo.png" alt="logo"></a>  
+				<a href="index.html"><img src="images/logo.png" alt="logo"></a>
 			</div>
 			<ul class="navigation">
 				
@@ -23,15 +22,15 @@
 				<table>
 					<tr>
 						<td style="width: 120px;">
-							<label for="username">RFID NO: </label>                
+							<label for="username">Kullanıcı Adı: </label>                
 						</td>
 						<td style="width: 50px;"></td>
 						<td>
-							<input type="text" id="username" placeholder="RFID">
+							<input type="text" id="username" placeholder="Kullanıcı adı giriniz">
 						</td>
 					</tr>
 					
-					<!-- <tr>
+					<tr>
 						<td>
 							<label for="parola">Parola: </label>                
 						</td>
@@ -39,7 +38,7 @@
 						<td>
 							<input type="password" id="parola" placeholder="parola giriniz">
 						</td>
-					</tr> -->
+					</tr>
 				</table>
 			
 			</div>
@@ -140,149 +139,5 @@
 			</div>
 		</div>
 	</div>
-
-
-	
-	<label id="sicaklik1" style="color:blue"></label>
-	<label id="isik1" style="color:Red"></label>
-	<label id="isitici1" style="color:green"></label>
-	<label id="gazDurum1" style="color:blue"></label>
-	<label id="rfid1" style="color:rgb(255, 0, 123)"></label>
-	
-
-
-
-
-
-	<script>
-
-		//var meg =0;
-		var motorDurum =0;
-		var sicaklik =0;
-		var isitici =0;
-		var isik = 0;
-		var gazDurum=0;
-		var rfid=0;
-		
-		// --------------------------------------
-		
-		
-		setInterval(function() {
-	
-		  
-		  //https://webtekproje.onrender.com
-	
-	
-		  //https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
-		  //https://webtekproje.onrender.com/verileriEkrandaGoster   YENI SITE 
-	
-		  fetch('http://localhost:3000/verileriEkrandaGoster') // http://localhost:3000/verileriEkrandaGoster TESTER
-			  .then(response => response.json())
-			  .then(data => {
-				 sicaklik = data.sicaklikDurum;
-				 isitici =data.isiticiDurum;
-				 isik = data.isikDurum;
-				 gazDurum=data.gazDurum;
-				 rfid =data.rfidNo;
-				
-				console.log(sicaklik);
-				console.log(isitici);
-				console.log(isik);
-				console.log(gazDurum);
-				console.log(rfid);
-				
-				
-				//document.getElementById("label1").textContent = labelValues;
-	
-				document.getElementById("sicaklik1").textContent = sicaklik;
-				document.getElementById("isitici1").textContent = isitici;
-				document.getElementById("isik1").textContent = isik;
-				document.getElementById("gazDurum1").textContent = gazDurum;
-				document.getElementById("rfid1").textContent = rfid;
-	
-				const myButton = document.getElementById("motorButon");
-				
-			  })
-			  .catch(error => console.error(error));
-	
-		},5000)
-	
-	
-	
-		window.onload = function(){
-	
-		  // --------------------------------------
-	
-		  // CANLI SITE ISMI VER
-	
-			//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
-			fetch('http://localhost:3000/roomData')
-			  .then(response => response.json())
-			  .then(data => {
-				 motorDurum = data.motorDurum;
-				//meg=motorDurum;
-				console.log(motorDurum)
-				//document.getElementById("label1").textContent = labelValues;
-	
-				const myButton = document.getElementById("motorButon");
-				if(motorDurum==1){
-				
-				}
-				else {}
-			  })
-			  .catch(error => console.error(error));
-		  };
-		
-	
-		// var motorDurum=0;
-		// var motorSayac=1;
-		// var sicaklikHava =25;
-		// var fanDurum=0
-	
-		const form = document.querySelector('#my-form');
-		form.addEventListener('submit', async (event) => {
-		  event.preventDefault(); // Formun varsayılan davranışını engelleme
-	
-			
-			// motorSayac++;
-			// motorDurum = motorSayac % 2;
-			
-			if(motorDurum==0){
-				motorDurum=1
-			}
-				else {
-					motorDurum=0 }
-	
-			
-			//else { console.log("hatalı bir durum..."+ motorSayac);}  // nolur nolmaz belki sorun olur diye yazdım buraya hiç girmemesi gerekiyor
-			console.log(motorDurum);
-	
-		  try {
-			const response = await fetch('http://localhost:3000/endpoint', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json'
-			  },
-			  body: JSON.stringify({ 
-				motor: motorDurum,
-				sicaklik : 11,
-				fan : 1})
-			});
-	
-			const responseData = await response.text();
-			console.log(responseData);
-		  } catch (error) {
-			console.error(error);
-		  }
-		});
-	
-	
-	
-	
-	
-	
-	  </script>
-
-
 </body>
 </html>

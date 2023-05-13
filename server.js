@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // hata cıkarsa burayı yoruma al
+app.use(express.static('public'));
 
 
 app.get('/', function(req, res,next) {  // "locachost:3000/"
@@ -122,18 +123,16 @@ app.get('/verileriEkrandaGoster', (req, res) => {
       //sicaklikDurum: localStorage.getItem('sicaklik'),
     
     
-      //   RFID : '1234567890',
-    //   temperature : '27',
-    //   gazStatus : 1
+      
     };
     res.json(dataesp32);
   
     
-    //console.log("Motor Durumu : "+dataesp32.motorDurum+"\n"+"RFID numarasi : "+ dataesp32.RFID +"\n"+"Sicaklik: "+dataesp32.temperature+"\nGaz Durumu : "+dataesp32.gazStatus);
+    
     console.log(".........................")
   
-    //console.log(frontend.motorStatus);
-  //res.send("Motor Durumu : "+dataesp32.motorDurum+"\n"+"RFID numarasi : "+ dataesp32.RFID +"\n"+"Sicaklik: "+dataesp32.temperature+"\nGaz Durumu : "+dataesp32.gazStatus)
+    
+ 
   });
  
 
