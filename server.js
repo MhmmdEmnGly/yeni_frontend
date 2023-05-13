@@ -68,14 +68,17 @@ app.post('/espdenGelenVeriler', (req, res) => {
   localStorage.setItem('isitici', req.body.isitici);
   localStorage.setItem('isik', req.body.isik);
   localStorage.setItem('gazDurum', req.body.gazDurum);
-  
+  localStorage.setItem('rfid', req.body.rfid);
 
-console.log("esp32den veriler geldi...");
+  
 console.log("........................");
+console.log("esp32den veriler geldi...");
+
 console.log("sicaklik :"+req.body.sicaklik)
 console.log("isitici :"+req.body.isitici)
 console.log("isik :"+req.body.isik)
 console.log("gaz Durum :"+req.body.gazDurum)
+console.log("RFID No:"+req.body.rfid)
 res.json("OK");
 });
 
@@ -90,7 +93,8 @@ app.get('/verileriEkrandaGoster', (req, res) => {
     sicaklikDurum: localStorage.getItem('sicaklik'),
     isiticiDurum: localStorage.getItem('isitici'),
     isikDurum: localStorage.getItem('isik'),
-    gazDurum: localStorage.getItem('gazDurum')
+    gazDurum: localStorage.getItem('gazDurum'),
+    rfidNo: localStorage.getItem('rfid')
   
   
   
