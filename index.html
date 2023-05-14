@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>WebTECH</title>
+	<title>WebTekProjesi</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	
 </head>
@@ -22,32 +22,27 @@
 				<table>
 					<tr>
 						<td style="width: 120px;">
-							<label for="username">Kullanıcı Adı: </label>                
+							<label for="username">RFID NO: </label>                
 						</td>
 						<td style="width: 50px;"></td>
 						<td>
-							<input type="text" id="username" placeholder="Kullanıcı adı giriniz">
+							<input type="text" id="rfidbilgileri" placeholder="RFID">
 						</td>
 					</tr>
 					
-					<tr>
-						<td>
-							<label for="parola">Parola: </label>                
-						</td>
-						<td></td>
-						<td>
-							<input type="password" id="parola" placeholder="parola giriniz">
-						</td>
-					</tr>
+					
 				</table>
 			
 			</div>
 		</div>
+
+
 		<div class="content">
 			<div class="kutu">
 				<h2>Kapı Aç</h2>
                 <div>
-					<button class="button5">X</button>
+					<button id="kapiButton">Kapı Butonu</button>
+					<label id="kapi"></label>
 				</div>
 			
 			</div>
@@ -64,7 +59,8 @@
 					</li>
 					<li>
 						    <div class="section">
-								<p><b>ANLIK SICAKLIK 24 DERECE</b></p>
+								<p><b>Sıcaklık:   <p id="sicaklik1">20  </p>	</b></p>
+								
 							</div>
 						
 					</li>
@@ -78,10 +74,15 @@
                              <div>
         
               
-                               <button class="button">1X</button>
-                               <button class="button2">2X</button>
-                               <button class="button3">3X</button>
+                               <button id="fan1x">1X</button>
+                               <button id="fan2x">2X</button>
+                               <button id="fan3x">3X</button>
+
                              </div>
+
+							 <div>
+								<p id="fan1"><b> OFF</b></label>
+							 </div>
         
 						</div>
 					</li>
@@ -95,11 +96,16 @@
 							<h2>Isıtıcı Derecesi</h2>
 							<div>
 						
-							  <button class="button">1X</button>
-						      <button class="button2">2X</button>
-							  <button class="button3">3X</button>	
+							  <button id="isitici1x">1X</button>
+						      <button id="isitici2x">2X</button>
+							  <button id="isitici3x">3X</button>	
 						
 							</div>
+
+							<div>
+								<p id="isitici1"><b> OFF</b></label>
+							 </div>
+
 						</div>
 					</li>
 					<li>
@@ -111,12 +117,16 @@
 							<h2>Işık Derecesi</h2>
                          <div>
 
-                             <button class="button">1X</button>
-                             <button class="button2">2X</button>
-                             <button class="button3">3X</button>
+                             <button id="isik1x">1X</button>
+                             <button id="isik2x">2X</button>
+                             <button id="isik3x">3X</button>
                             
                          </div>
 
+						 <div>
+							<b><p id="isik1"> OFF</label></b>
+						 </div>
+						 
 						</div>
 					</li>
 					<li>
@@ -127,8 +137,10 @@
 							</div>
 							<h2>Tank Çalıştır</h2>
 							<div class="kutu3">
-								<button class="button4">X</button>
-								<p><b>Gaz Algılandı Bilgisi</b></p>  
+								<button id="gaz">X</button>
+								<b><p id="gaz1">Gaz Durumu : 0</p></b>  
+								<b><p id="gaz2">Tehlikeli Gaz Yok</p></b>  
+
 						  </div> 
 							
 						</div>
@@ -139,5 +151,522 @@
 			</div>
 		</div>
 	</div>
+
+	<span id="sicaklik1" style="color:rgb(171, 68, 68)"></label>
+	<!-- <label id="sicaklik1" style="color:blue"></label> -->
+	<label id="isik1" style="color:Red"></label>
+	<label id="isitici1" style="color:green"></label>
+	<label id="gazDurum1" style="color:blue"></label>
+	<label id="rfid1" style="color:rgb(255, 0, 132)"></label>
+	
+
+
+
+	<script>
+
+
+//FAN 1 AYARLARI ---------------------------------------------------------------------------------
+
+const buttonFan1 = document.querySelector('#fan1x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonFan1.addEventListener('click', makeApiRequestFan1);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestFan1() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("fan1").textContent = 1;
+  console.log("deneme")
+  try {
+			const response = await fetch('http://localhost:3000/fan', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				fan : 1})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+//FAN 2 AYARLARI ---------------------------------------------------------------------------
+
+const buttonFan2 = document.querySelector('#fan2x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonFan2.addEventListener('click', makeApiRequestFan2);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestFan2() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("fan1").textContent = 2;
+  try {
+			const response = await fetch('http://localhost:3000/fan', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				fan : 2})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+//FAN 3 AYARLARI ---------------------------------------------------------------------------
+
+const buttonFan3 = document.querySelector('#fan3x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonFan3.addEventListener('click', makeApiRequestFan3);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestFan3() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("fan1").textContent = 3;
+  try {
+			const response = await fetch('http://localhost:3000/fan', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				fan : 3})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+
+
+//Isıtıcı 1 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsitici1 = document.querySelector('#isitici1x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsitici1.addEventListener('click', makeApiRequestIsitici1);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsitici1() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isitici1").textContent = 1;
+  try {
+			const response = await fetch('http://localhost:3000/isitici', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isitici : 1})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+//
+//Isıtıcı 2 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsitici2 = document.querySelector('#isitici2x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsitici2.addEventListener('click', makeApiRequestIsitici2);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsitici2() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isitici1").textContent = 2;
+  try {
+			const response = await fetch('http://localhost:3000/isitici', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isitici : 2})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+//Isıtıcı 3 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsitici3 = document.querySelector('#isitici3x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsitici3.addEventListener('click', makeApiRequestIsitici3);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsitici3() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isitici1").textContent = 3;
+  try {
+			const response = await fetch('http://localhost:3000/isitici', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isitici : 3})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+//İsik 1 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsik1= document.querySelector('#isik1x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsik1.addEventListener('click', makeApiRequestIsik1);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsik1() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isik1").textContent = 1;
+  try {
+			const response = await fetch('http://localhost:3000/isik', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isik : 1})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+//İsik 2 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsik2= document.querySelector('#isik2x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsik2.addEventListener('click', makeApiRequestIsik2);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsik2() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isik1").textContent = 2;
+  try {
+			const response = await fetch('http://localhost:3000/isik', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isik : 2})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+
+//İsik 3 AYARLARI ---------------------------------------------------------------------------
+
+const buttonIsik3= document.querySelector('#isik3x');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonIsik3.addEventListener('click', makeApiRequestIsik3);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestIsik3() {
+  // API isteği yapılacak URL'i belirtin
+  document.getElementById("isik1").textContent = 3;
+  try {
+			const response = await fetch('http://localhost:3000/isik', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				isik : 3})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+//Gaz AYARLARI ---------------------------------------------------------------------------
+
+const buttongaz= document.querySelector('#gaz');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttongaz.addEventListener('click', makeApiRequestGaz);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestGaz() {
+  // API isteği yapılacak URL'i belirtin
+  try {
+			const response = await fetch('http://localhost:3000/gaz', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify()
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+//KApı  AYARLARI ---------------------------------------------------------------------------
+
+const buttonKapi = document.querySelector('#kapiButton');
+// Düğmeye tıklanınca makeApiRequest() fonksiyonunu çağırın
+buttonKapi.addEventListener('click', makeApiRequestKapi2);
+
+// API isteğini gerçekleştiren fonksiyon
+async function  makeApiRequestKapi2() {
+  // API isteği yapılacak URL'i belirtin
+  try {
+			const response = await fetch('http://localhost:3000/kapi', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify()
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+	}
+}
+
+
+
+
+
+		//var meg =0;
+		var motorDurum =0; // buton için
+
+		var sicaklik =0;
+		var isitici =0;
+		var isik = 0;
+		var gazDurum=0;
+		var fan=0;
+		var gazYazisi="";
+		var rfidNumara="";
+		var kapi="";
+		var tehlikeliGaz=0;
+
+		
+		// --------------------------------------
+		
+		
+		setInterval(function() {
+	
+		  // TEST AMACLI BASTA bilgiler localhost a ve gosterilenveriler kısmına gönderilecek
+		  //https://webtekproje.onrender.com/verileriEkrandaGoster
+	
+	
+		  //https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+		  fetch('http://localhost:3000/verileriEkrandaGoster') //  BURAYI localhosttan cıkar
+			  .then(response => response.json())
+			  .then(data => {
+				 sicaklik = data.sicaklikDurum;
+				 isitici =data.isiticiDurum;
+				 isik = data.isikDurum;
+				 gazDurum=data.gazDurum;
+				 rfid=data.rfidNo;
+				 fan=data.fan;
+				 kapi= data.kapi;
+				 tehlikeliGaz= data.tehlikeliGaz;
+
+				
+				console.log(sicaklik);
+				console.log(isitici);
+				console.log(isik);
+				console.log(gazDurum);
+				console.log(rfid);
+				console.log(fan);
+				console.log(kapi);
+				console.log(tehlikeliGaz);
+
+				
+				if(gazDurum==1){
+					gazYazisi="Tank Calistirildi..."
+				}
+				else {gazYazisi="Gaz Durum : 0"}
+				
+				if(kapi==1){
+					document.getElementById("kapi").textContent = "Kapı Açıldı";
+				}
+				else {document.getElementById("kapi").textContent = "Kapı Kapatıldı";}
+				if(tehlikeliGaz==1){
+					document.getElementById("gaz2").textContent = "Gaz Algılandı";
+				}
+				else {document.getElementById("gaz2").textContent = "Tehlikeli Gaz Yok";}
+				//document.getElementById("label1").textContent = labelValues;
+				
+				document.getElementById("sicaklik1").textContent = sicaklik;
+				document.getElementById("isitici1").textContent = isitici;
+				document.getElementById("isik1").textContent = isik;
+				document.getElementById("gaz1").textContent = gazYazisi;
+				//document.getElementById("rfid1").textContent = rfid;
+				document.getElementById("fan1").textContent = fan;
+
+				var rfidNumara =document.getElementById("rfidbilgileri"); // rfid değişkeniyle backendden aldıgım veriyi frontendde placeholder içine yazıyorum
+				rfidNumara.placeholder=rfid;
+				
+				
+	
+				//const myButton = document.getElementById("motorButon");
+				
+			  })
+			  .catch(error => console.error(error));
+	
+		},5000)
+	
+	
+	
+		window.onload = function(){
+	
+		  // --------------------------------------
+	
+		  // CANLI SITE ISMI VER
+	
+			//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			fetch('//http://localhost:3000/roomData')  //https://webtekproje.onrender.com
+			  .then(response => response.json())
+			  .then(data => {
+				 motorDurum = data.motorDurum;
+				//meg=motorDurum;
+				console.log(motorDurum)
+				//document.getElementById("label1").textContent = labelValues;
+	
+				const myButton = document.getElementById("motorButon");
+				if(motorDurum==1){
+				
+				}
+				else {}
+			  })
+			  .catch(error => console.error(error));
+		  };
+		
+	
+		// BUTONA BASINCA POST İSLEMLERİ OLAN YER ----------------------------- 
+	
+		const motorbutton = document.querySelector('#my-form');
+		form.addEventListener('submit', async (event) => {
+		  event.preventDefault(); // Formun varsayılan davranışını engelleme
+	
+			
+			if(motorDurum==0){
+				motorDurum=1
+			}
+				else {
+					motorDurum=0 }
+	
+			
+			
+			console.log(motorDurum);
+	
+		  try {
+			const response = await fetch('http://localhost:3000/endpoint', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				motor: motorDurum,
+				sicaklik : 11,
+				fan : 1})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+		  }
+		});
+	
+
+
+
+  //1X BUTONU 2.DENEME
+
+  const buton1deneme = document.querySelector('#fan1x');
+  buton1deneme.addEventListener('click', async (event) => {
+	
+	
+		  try {
+			const response = await fetch('http://localhost:3000/fan', {//https://webtekcanli.onrender.com/verileriEkrandaGoster   ESKI SITE 
+			  method: 'POST',							//https://webtekproje.onrender.com/verileriEkrandaGoster
+			  headers: {
+				'Content-Type': 'application/json'
+			  },
+			  body: JSON.stringify({ 
+				fan : 1})
+			});
+	
+			const responseData = await response.text();
+			console.log(responseData);
+		  } catch (error) {
+			console.error(error);
+		  }
+		});
+
+
+
+
+
+const btndeneme = document.querySelector('btn1');
+
+// Düğmeye tıklanınca postRequest() fonksiyonunu çağırın
+btndeneme.addEventListener('click', postRequest);
+
+// POST isteği işlemini gerçekleştiren fonksiyon
+function postRequest() {
+	console.log("odlldu");
+}
+//-------------------------------------------------------------------
+
+	
+	
+	
+	
+	
+	  </script>
+
+
+
 </body>
 </html>

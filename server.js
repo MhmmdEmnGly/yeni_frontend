@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // hata cıkarsa burayı yoruma al
-app.use(express.static('public'));
+app.use(express.static('public'));  // BU CSS LERİ DAHİL ETMEK İCİN COK ONEMLI !!!!!!!!!!!!!!!!!!
 
 
 app.get('/', function(req, res,next) {  // "locachost:3000/"
@@ -23,9 +23,125 @@ app.get('/', function(req, res,next) {  // "locachost:3000/"
   console.info(__dirname);
 });
 
+//------------------------- POST ISLEMLERI -----------------
+
+app.post('/fan', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+
+  localStorage.setItem('fan', req.body.fan);
+  
+var result = {
+   
+   fan : req.body.fan
+  };
 
 
+  res.json(result)
 
+console.log("\n Fana Post islemi basariyla gerceklesti...");
+console.log(result);
+console.log("........................");
+});
+
+
+//ISITICI APİ
+
+
+app.post('/isitici', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+
+  localStorage.setItem('isitici', req.body.isitici);
+  
+var result = {
+   
+   isitici : req.body.isitici
+  };
+
+
+  res.json(result)
+
+console.log("\n Fana Post islemi basariyla gerceklesti...");
+console.log(result);
+console.log("........................");
+});
+
+//İSİK APİ
+
+app.post('/isik', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+
+  localStorage.setItem('isik', req.body.isik);
+  
+var result = {
+   
+   isik : req.body.isik
+  };
+
+
+  res.json(result)
+
+console.log("\n Fana Post islemi basariyla gerceklesti...");
+console.log(result);
+console.log("........................");
+});
+
+//GAz APİ
+
+app.post('/gaz', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+  var gazDurum =localStorage.getItem('gazDurum');
+  if(gazDurum ==1){
+    localStorage.setItem('gazDurum', 0);
+  }
+  else{
+    localStorage.setItem('gazDurum', 1);
+  }
+  
+var result = {
+   
+   gazDurum : gazDurum
+  };
+
+
+  res.json(result)
+
+console.log("\n Fana Post islemi basariyla gerceklesti...");
+console.log(result);
+console.log("........................");
+});
+
+//GAz APİ
+
+app.post('/kapi', (req, res) => {
+
+  const localStorage = new LocalStorage('./local-storage');
+    var kapiDurum =localStorage.getItem('kapiDurum');
+    if(kapiDurum ==1){
+      localStorage.setItem('kapiDurum', 0);
+    }
+    else{
+      localStorage.setItem('kapiDurum', 1);
+    }
+ 
+    var result = {
+   
+      kapiDurum : kapiDurum
+     };
+   
+
+  res.json(localStorage.getItem('kapiDurum'));
+  
+ 
+
+console.log("\n Fana Post islemi basariyla gerceklesti...");
+console.log(result);
+console.log("........................");
+});
+//-------------------------------------------------------------------------------------------
 // POST isteği karşılanması
 app.post('/endpoint', (req, res) => {
 
@@ -70,16 +186,24 @@ app.post('/espdenGelenVeriler', (req, res) => {
   localStorage.setItem('isik', req.body.isik);
   localStorage.setItem('gazDurum', req.body.gazDurum);
   localStorage.setItem('rfid', req.body.rfid);
+  localStorage.setItem('fan', req.body.fan);
+  localStorage.setItem('tehlikeliGaz', req.body.tehlikeliGaz);
+
+
 
   
 console.log("........................");
 console.log("esp32den veriler geldi...");
 
 console.log("sicaklik :"+req.body.sicaklik)
+console.log("fan:"+req.body.fan)
 console.log("isitici :"+req.body.isitici)
 console.log("isik :"+req.body.isik)
 console.log("gaz Durum :"+req.body.gazDurum)
 console.log("RFID No:"+req.body.rfid)
+console.log("tehlikeliGaz"+req.body.tehlikeliGaz)
+
+
 res.json("OK");
 });
 
@@ -95,9 +219,10 @@ app.get('/verileriEkrandaGoster', (req, res) => {
     isiticiDurum: localStorage.getItem('isitici'),
     isikDurum: localStorage.getItem('isik'),
     gazDurum: localStorage.getItem('gazDurum'),
-    rfidNo: localStorage.getItem('rfid')
-  
-  
+    rfidNo: localStorage.getItem('rfid'),
+    fan:  localStorage.getItem('fan'),
+    kapi :localStorage.getItem('kapiDurum'),
+    tehlikeliGaz :localStorage.getItem('tehlikeliGaz')
   
   };
   
