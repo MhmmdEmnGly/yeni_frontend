@@ -184,7 +184,7 @@ app.post('/espdenGelenVeriler', (req, res) => {
   localStorage.setItem('sicaklik', req.body.sicaklik);// servo da yazabilirsin ************ daha duzenlemedim
   localStorage.setItem('isitici', req.body.isitici);
   localStorage.setItem('isik', req.body.isik);
-  localStorage.setItem('gazDurum', req.body.gazDurum);
+  localStorage.setItem('gazDurum', req.body.gazDurum); // tank calıstırma kodu
   localStorage.setItem('rfid', req.body.rfid);
   localStorage.setItem('fan', req.body.fan);
   localStorage.setItem('tehlikeliGaz', req.body.tehlikeliGaz);
